@@ -1,5 +1,77 @@
 //ESDRAS IMPLEMENTAR CODIGO. GL HF
+import { useState, useEffect } from 'react';
+import {useNavigate} from 'react-router-dom';
+import img from '../img/user.png'
+
 export default function Movie() {
+
+    const navigate = useNavigate();
+    var item = localStorage.getItem('user');
+    const [info, setinfo] = useState('')
+    const [img, setimg] = useState('')
+    const [produ, setprod] = useState('') 
+    const ti = JSON.parse(localStorage.getItem('title'));
+    
+    useEffect(()=> {
+        setinfo(ti)
+        const linkdef = "https://image.tmdb.org/t/p/original";
+        var imageshown =  linkdef + ti.poster_path ;
+        setimg(imageshown)
+
+        if(ti.production_companies)
+        {
+            var prod = ti.production_companies.split(',');
+            var prodfilm = [];
+            for(let i = 0; i<prod.length;i++ )
+            {
+                if (i%2 == 0  )
+                {
+                    prodfilm[i] = prod[i];
+                }
+            }
+            var produ = prodfilm.toString().split("{'name':");
+            produ.splice(0, 1);
+            var produ1 = produ.toString().split(',, ,');
+            var newprodu = produ1.toString().split("'").join("") ;
+            setprod(newprodu);
+        }
+    }
+    )
+
+    function test()
+    {
+        var a = document.getElementById('welcomeDiv');
+        if (a.style.display == "none")
+        {
+            a.style.display = "block";
+            document.querySelector('#textusername').innerHTML = "Username: " + item;     
+        }
+        else{
+            a.style.display = "none";
+        } 
+    }
+
+    function loginpag() {
+        localStorage.clear();
+        navigate('/');
+    }
+
+    function historyback()
+    {
+        navigate('/userDetails');
+    }
+
+    function aboutus()
+    {
+        document.getElementById('divabout').style.display = "block";
+        document.getElementById('App-header4').style.display = "none";
+    }
+    function home()
+    {
+        document.getElementById('divabout').style.display = "none";
+        document.getElementById('App-header4').style.display = "flex";
+    }
+
     return(
         <>
         <header className='headermain'>
@@ -69,37 +141,39 @@ export default function Movie() {
                     <p id='text1'>{info.title}</p>
                     <img id = "imgs"  src={img} width={300} height={300} style={{marginLeft:'auto',marginRight:'auto'}}/>
                     <div class='App_main1' >      
-                        <p id="textshort">{info.overview}</p>    
+                        <p id="textshort">Released on {info.release_date} by {produ} </p>    
                     </div> 
                     <div class = "App_main2">
                         <li class="ui-item">
-                            <p id="tex5">Status</p>  
-                            <p id="textshort6">{info.status}</p> 
+                            <p id="tex5">Make your review</p>  
+                            <p id="textshort6"></p> 
                         </li>
                         <li class="ui-item">
-                            <p id="tex0">{produ ? "Production Companies" : ''}</p> 
-                            <p id="textshort2">{produ}</p> 
+                            <p id="tex0"></p> 
+                            <p id="textshort2"></p> 
                         </li>
                         <li class="ui-item">
-                            <p id="tex1">Release Data</p>  
-                            <p id="textshort3">{info.release_date}</p> 
+                            <p id="tex1">Rating(1-10)</p>  
+                            <p id="textshort3"></p> 
                         </li>
+                        <form>
                         <li class="ui-item">
-                            <p id="tex2">{rate ? "Movie Rate" : ''}</p> 
-                            <p id="textshort3">{rate}</p>              
+                            <p id="tex2">Review Title(Optional)</p> 
+                            <textarea rows="2" cols="33" placeholder='Write your title review here!'></textarea>              
                         </li> 
                         <li class="ui-item">
-                            <p id="tex4">{genr ? "Movie Genre" : ''}</p>  
-                            <p id="textshort5">{genr}</p> 
+                            <p id="tex4">Review Text(Optional)</p>  
+                            <textarea name="story" rows="10" cols="33" placeholder='Write your review here!' ></textarea> 
                         </li>
+                        </form>
                         <li class="ui-item">
-                            <p id="tex3">{coll ? "Collection" : ''}</p>  
-                            <p id="textshort4">{coll}</p> 
+                            <p id="tex3"></p>  
+                            <p id="textshort4"></p> 
                         </li>     
                     </div>   
                     <div class='App_main1' style={{marginTop:"10px"}} >      
-                        <button className='textlogin' onClick={() => navigate('/reviewmovie')}>
-                             Review Movie
+                        <button className='textlogin' onClick={() => navigate('/makeareview')}>
+                             Make a Review 
                         </button>   
                     </div>      
                 </div>

@@ -256,8 +256,9 @@ header ul
 {
   display: flex;
   flex-direction: column;
-  margin-left: 45px;
+  margin-left: 80px;
   margin-right: 45px;
+  
 }
 
 #textshort{
@@ -341,7 +342,7 @@ header ul
 #tex1{
   text-align: left;
   font-size: 13px;
-  color: rgb(187, 187, 187);
+  color: white;
   letter-spacing: 0.15em;
   width: 180px;
 }
@@ -349,9 +350,9 @@ header ul
 #tex2{
   text-align: left;
   font-size: 13px;
-  color: rgb(187, 187, 187);
+  color: white;
   letter-spacing: 0.15em;
-  width: 180px;
+  width: 300px;
 }
 
 #tex3{
@@ -365,17 +366,17 @@ header ul
 #tex4{
   text-align: left;
   font-size: 13px;
-  color: rgb(187, 187, 187);
+  color: white;
   letter-spacing: 0.15em;
-  width: 180px;
+  width: 300px;
 }
 
 #tex5{
   text-align: left;
-  font-size: 13px;
-  color: rgb(187, 187, 187);
+  font-size: 15px;
+  color: white;
   letter-spacing: 0.15em;
-  width: 180px;
+  width: 300px;
 }
 
 .App_main3
@@ -397,6 +398,7 @@ header ul
 
 .ui-item {
   display: flex;
+  flex-direction: column;
   flex: 1 1 0%;
   justify-content: space-between;
 }
@@ -421,6 +423,22 @@ img {
         max-width: 1536px;
         margin: auto;
     }
+}
+
+textarea {
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+textarea {
+  padding: 10px;
+  background-color: white;
+  color: black;
+  max-width: 100%;
+  line-height: 1.5;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 1px #999;
 }
 
 
